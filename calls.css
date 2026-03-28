@@ -1,0 +1,100 @@
+/* ============================================
+   calls.css — Voice & Video Call UI
+============================================ */
+
+/* Calls wrap */
+.calls-wrap{display:flex;flex-direction:column;height:100%}
+
+/* Call partner card */
+.call-partner-card,.video-partner-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-l);padding:40px;display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:32px;text-align:center}
+.cp-avatar{width:80px;height:80px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:#fff;box-shadow:0 0 30px rgba(124,58,237,0.3)}
+.cp-name,.video-partner-name{font-size:20px;font-weight:700}
+.cp-status,.video-partner-status{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-s)}
+
+/* Call start buttons */
+.call-start-btn,.video-start-btn{padding:16px 36px;font-size:16px;font-weight:700;border:none;cursor:pointer;border-radius:var(--radius-f);transition:all var(--t);display:flex;align-items:center;gap:10px;margin-top:8px}
+.call-start-btn{background:var(--grad);color:#fff}
+.call-start-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-g)}
+.video-start-btn{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff}
+.video-start-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(59,130,246,0.3)}
+
+/* History section */
+.history-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-l);overflow:hidden}
+.history-title{font-size:15px;font-weight:700;padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.history-list{display:flex;flex-direction:column}
+.history-item{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);transition:background var(--t);cursor:pointer}
+.history-item:last-child{border-bottom:none}
+.history-item:hover{background:var(--card-h)}
+.hi-icon{font-size:22px;width:42px;height:42px;background:var(--bg-e);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hi-icon.missed{background:rgba(239,68,68,0.1)}
+.hi-info{flex:1}
+.hi-name{font-size:14px;font-weight:600}
+.hi-details{font-size:12px;color:var(--text-m);margin-top:2px}
+.hi-details.missed{color:var(--danger)}
+.hi-time{font-size:12px;color:var(--text-m);flex-shrink:0}
+.hi-dur{font-size:12px;color:var(--text-s);flex-shrink:0}
+.empty-history{padding:40px;text-align:center;color:var(--text-m);font-size:14px}
+
+/* ===== CALL OVERLAY ===== */
+.call-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center}
+.call-screen{width:100%;height:100%;background:linear-gradient(160deg,#0d0416 0%,#150a2a 40%,#0d0416 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;position:relative;overflow:hidden}
+.call-screen::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.1) 0%,transparent 60%);border-radius:50%;animation:pulse 3s ease-in-out infinite}
+.call-e2ee-tag{position:absolute;top:24px;left:50%;transform:translateX(-50%);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#4ade80;padding:6px 18px;border-radius:var(--radius-f);font-size:13px;font-weight:500;white-space:nowrap}
+
+/* Rings */
+.call-rings{position:relative;display:flex;align-items:center;justify-content:center;width:160px;height:160px;margin-bottom:8px}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(124,58,237,0.4)}
+.r1{width:160px;height:160px;animation:ripple 2s ease-out infinite}
+.r2{width:130px;height:130px;animation:ripple 2s ease-out 0.6s infinite}
+.r3{width:100px;height:100px;animation:ripple 2s ease-out 1.2s infinite}
+.call-av-inner{width:80px;height:80px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;z-index:1;box-shadow:0 0 40px rgba(124,58,237,0.4)}
+.call-ov-name{font-size:26px;font-weight:800;text-align:center}
+.call-ov-status{font-size:15px;color:var(--text-s);text-align:center}
+.call-duration{font-size:18px;font-weight:600;color:var(--success);font-variant-numeric:tabular-nums}
+
+/* Call controls */
+.call-controls{display:flex;align-items:center;gap:28px;margin-top:16px}
+.ctrl-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ctrl-btn{width:62px;height:62px;border-radius:50%;border:none;font-size:22px;cursor:pointer;transition:all var(--t);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#fff}
+.ctrl-btn:hover{background:rgba(255,255,255,0.18);transform:scale(1.08)}
+.ctrl-btn.active-mute{background:rgba(239,68,68,0.25)}
+.ctrl-end{background:var(--danger) !important;width:72px;height:72px;font-size:26px}
+.ctrl-end:hover{background:#dc2626 !important;box-shadow:0 0 30px rgba(239,68,68,0.4)}
+.ctrl-lbl{font-size:12px;color:var(--text-m)}
+
+/* ===== VIDEO CALL OVERLAY ===== */
+.video-overlay{position:fixed;inset:0;z-index:1000}
+.video-screen{width:100%;height:100%;background:#000;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.remote-video{position:absolute;inset:0;background:linear-gradient(160deg,#0d0416,#150a2a);display:flex;align-items:center;justify-content:center}
+.rv-placeholder{display:flex;flex-direction:column;align-items:center;gap:16px}
+.rv-avatar{width:100px;height:100px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700;color:#fff;box-shadow:0 0 50px rgba(124,58,237,0.3)}
+.rv-name{font-size:20px;font-weight:700;color:#fff}
+.rv-e2ee{position:absolute;top:16px;right:16px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#4ade80;font-size:12px;padding:5px 12px;border-radius:var(--radius-f)}
+
+/* Local video PiP */
+.local-video{position:absolute;top:24px;right:24px;width:140px;height:190px;border-radius:18px;background:#111;border:2px solid rgba(255,255,255,0.15);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:all var(--t)}
+.local-video:hover{transform:scale(1.04)}
+.lv-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a0a2e,#0d0a1a);font-size:16px;font-weight:600;color:rgba(255,255,255,0.5)}
+.local-video-label{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:11px;color:rgba(255,255,255,0.6)}
+
+/* Video header/status */
+.vo-header{position:absolute;top:0;left:0;right:0;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(0,0,0,0.7),transparent)}
+.vo-name{font-size:17px;font-weight:700;color:#fff}
+.vo-dur{font-size:15px;color:rgba(255,255,255,0.7);font-variant-numeric:tabular-nums}
+.vo-status{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:16px;color:rgba(255,255,255,0.8);background:rgba(0,0,0,0.4);padding:8px 20px;border-radius:var(--radius-f);backdrop-filter:blur(8px)}
+
+/* Video controls */
+.video-controls{position:absolute;bottom:0;left:0;right:0;padding:24px 40px;display:flex;align-items:center;justify-content:center;gap:18px;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent)}
+.vc-btn{width:56px;height:56px;border-radius:50%;border:none;font-size:22px;cursor:pointer;transition:all var(--t);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.12);color:#fff;backdrop-filter:blur(8px)}
+.vc-btn:hover{background:rgba(255,255,255,0.22);transform:scale(1.1)}
+.vc-btn.off{background:rgba(239,68,68,0.25)}
+.vc-end{background:var(--danger) !important;width:64px;height:64px;font-size:26px}
+.vc-end:hover{background:#dc2626 !important;box-shadow:0 0 30px rgba(239,68,68,0.4)}
+
+@media(max-width:600px){
+  .call-controls{gap:18px}
+  .ctrl-btn{width:54px;height:54px;font-size:20px}
+  .ctrl-end{width:62px;height:62px}
+  .local-video{width:100px;height:140px;top:16px;right:16px}
+  .video-controls{padding:16px 20px;gap:12px}
+}

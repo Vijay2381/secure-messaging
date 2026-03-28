@@ -1,0 +1,103 @@
+/* ============================================
+   main.css — Design System & Global Styles
+   Secure Messaging
+============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg: #080817;
+  --bg-s: #0f0f20;
+  --bg-e: #15152a;
+  --card: rgba(255,255,255,0.04);
+  --card-h: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.07);
+  --border-s: rgba(255,255,255,0.13);
+  --primary: #7c3aed;
+  --primary-l: #9d55ff;
+  --accent: #ec4899;
+  --grad: linear-gradient(135deg, #7c3aed, #ec4899);
+  --text: #f0ecff;
+  --text-s: #a89fc0;
+  --text-m: #6b6280;
+  --success: #10b981;
+  --danger: #ef4444;
+  --radius-s: 8px;
+  --radius: 14px;
+  --radius-l: 22px;
+  --radius-f: 9999px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-g: 0 0 40px rgba(124,58,237,0.25);
+  --t: 0.2s ease;
+  --sidebar-w: 260px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+input,textarea{font-family:inherit}
+*{scrollbar-width:thin;scrollbar-color:var(--primary) transparent}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:var(--radius-f)}
+
+.hidden{display:none !important}
+.view{width:100%}
+.gradient-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Buttons */
+.btn-primary{background:var(--grad);color:#fff;border:none;padding:12px 26px;border-radius:var(--radius-f);font-size:14px;font-weight:600;cursor:pointer;transition:all var(--t);display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-g)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--text-s);border:1px solid var(--border-s);padding:12px 26px;border-radius:var(--radius-f);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--t);display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{background:var(--card);color:var(--text);border-color:var(--primary)}
+.btn-danger{background:rgba(239,68,68,0.12);color:var(--danger);border:1px solid rgba(239,68,68,0.25);padding:10px 22px;border-radius:var(--radius-f);font-size:14px;font-weight:500;cursor:pointer;transition:all var(--t)}
+.btn-danger:hover{background:rgba(239,68,68,0.22)}
+.btn-large{padding:16px 34px;font-size:16px}
+.btn-full{width:100%;justify-content:center}
+.btn-arrow{transition:transform var(--t)}
+.btn-primary:hover .btn-arrow{transform:translateX(4px)}
+.icon-btn{background:transparent;border:none;color:var(--text-s);padding:8px;border-radius:var(--radius-s);cursor:pointer;transition:all var(--t);font-size:16px;display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{color:var(--text);background:var(--card)}
+
+/* Status dot */
+.status-dot{display:inline-block;width:7px;height:7px;background:var(--success);border-radius:50%;animation:blink 2.5s ease infinite}
+
+/* Loading Screen */
+.loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.6s ease,visibility 0.6s ease}
+.loading-screen.fade-out{opacity:0;visibility:hidden;pointer-events:none}
+.loading-logo{display:flex;flex-direction:column;align-items:center;gap:16px}
+.loading-icon{font-size:52px;animation:pulse 1.5s ease-in-out infinite}
+.loading-name{font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.loading-bar{width:220px;height:3px;background:var(--bg-e);border-radius:var(--radius-f);overflow:hidden}
+.loading-fill{height:100%;background:var(--grad);border-radius:var(--radius-f);animation:loading 1.6s ease-in-out forwards}
+.loading-sub{font-size:13px;color:var(--text-m)}
+
+/* Toast */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bg-e);border:1px solid var(--border-s);color:var(--text);padding:12px 24px;border-radius:var(--radius-f);font-size:14px;font-weight:500;z-index:9998;box-shadow:var(--shadow);transition:transform 0.3s ease;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Panels */
+.panel{animation:fadeIn 0.3s ease}
+.panel-header{padding:32px 32px 0;margin-bottom:24px}
+.panel-title{font-size:24px;font-weight:800;margin-bottom:6px}
+.panel-sub{font-size:14px;color:var(--text-s)}
+.panel-body{padding:0 32px 32px}
+
+/* No partner state */
+.no-partner{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:400px;text-align:center;gap:16px;padding:40px}
+.np-icon{font-size:64px;margin-bottom:8px}
+.no-partner h3{font-size:20px;font-weight:700}
+.no-partner p{color:var(--text-s);max-width:320px}
+
+/* Keyframes */
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes loading{from{width:0}to{width:100%}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes ripple{0%{transform:scale(1);opacity:0.5}100%{transform:scale(2.8);opacity:0}}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.15)}28%{transform:scale(1)}42%{transform:scale(1.1)}70%{transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes particleUp{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:0.7}90%{opacity:0.3}100%{transform:translateY(-100vh) translateX(var(--dx,30px));opacity:0}}
