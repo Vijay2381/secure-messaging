@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Messaging — Private & Encrypted for Couples</title>
+  <meta name="description" content="End-to-end encrypted private messaging for couples. Chats, calls, and video calls that only you two can access.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/calls.css">
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen" class="loading-screen">
+  <div class="loading-logo">
+    <div class="loading-icon">🔐</div>
+    <div class="loading-name">Secure Messaging</div>
+    <div class="loading-bar"><div class="loading-fill"></div></div>
+    <div class="loading-sub">Initializing secure environment...</div>
+  </div>
+</div>
+
+<!-- ===================== LANDING PAGE ===================== -->
+<div id="view-landing" class="view hidden">
+  <canvas id="particles-canvas" class="particles-canvas"></canvas>
+  <nav class="landing-nav">
+    <div class="nav-brand">
+      <span class="brand-icon">🔐</span>
+      <span class="brand-name">Secure Messaging</span>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-ghost" onclick="App.navigate('login')">Log In</button>
+      <button class="btn-primary" onclick="App.navigate('signup')">Get Started</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge"><span class="badge-dot"></span>End-to-End Encrypted</div>
+    <h1 class="hero-title">Your Love,<br><span class="gradient-text">Completely Private</span></h1>
+    <p class="hero-subtitle">The only messaging platform built exclusively for couples. Encrypted conversations, secure calls — only you two can access your world.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary btn-large" onclick="App.navigate('signup')">Start Free <span class="btn-arrow">→</span></button>
+      <button class="btn-ghost btn-large" onclick="App.navigate('login')">Already have an account</button>
+    </div>
+    <div class="hero-trust">
+      <span>🔒 AES-256 Encrypted</span><span class="trust-dot">•</span>
+      <span>🚫 Zero Data Access</span><span class="trust-dot">•</span>
+      <span>🛡️ Private by Design</span>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">💬</div><h3>Encrypted Chats</h3><p>Messages encrypted on your device. Nobody — not even us — can read them.</p></div>
+      <div class="feature-card"><div class="feature-icon">📞</div><h3>Private Calls</h3><p>Voice calls wrapped in end-to-end encryption. Crystal clear, completely private.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎥</div><h3>Secure Video</h3><p>Video calls only you two can see. No recordings, no access, no exceptions.</p></div>
+      <div class="feature-card"><div class="feature-icon">🤝</div><h3>Partner Connect</h3><p>Link with your partner using a unique private passcode — no phone number needed.</p></div>
+      <div class="feature-card"><div class="feature-icon">📷</div><h3>Secure Media</h3><p>Share photos and videos with full encryption. Your memories, secured forever.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔑</div><h3>Zero Knowledge</h3><p>We cannot access your data. Ever. Even if legally compelled, we have nothing to give.</p></div>
+    </div>
+  </section>
+  <footer class="landing-footer">
+    <span>🔐 Secure Messaging</span>
+    <span>Private by Design · End-to-End Encrypted · Zero Knowledge</span>
+  </footer>
+</div>
+
+<!-- ===================== SIGNUP PAGE ===================== -->
+<div id="view-signup" class="view hidden auth-view">
+  <div class="auth-bg"><div class="auth-glow g1"></div><div class="auth-glow g2"></div></div>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo"><span>🔐</span><span class="auth-logo-name">Secure Messaging</span></div>
+      <h2 class="auth-title">Create your account</h2>
+      <p class="auth-subtitle">Start your private, encrypted journey together</p>
+      <form id="signup-form" class="auth-form" onsubmit="Auth.handleSignup(event)">
+        <div class="form-group">
+          <label for="su-name">Your Name</label>
+          <input type="text" id="su-name" placeholder="Enter your name" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="su-email">Email Address</label>
+          <input type="email" id="su-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="su-pass">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="su-pass" placeholder="Create a strong password" required oninput="Auth.checkStrength(this.value)">
+            <button type="button" class="eye-btn" onclick="Auth.toggleEye('su-pass', this)">👁</button>
+          </div>
+          <div class="strength-wrap">
+            <div class="strength-bars">
+              <div class="s-bar" id="sb1"></div><div class="s-bar" id="sb2"></div>
+              <div class="s-bar" id="sb3"></div><div class="s-bar" id="sb4"></div>
+            </div>
+            <span class="strength-lbl" id="strength-lbl">Enter a password</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="su-confirm">Confirm Password</label>
+          <div class="input-wrap">
+            <input type="password" id="su-confirm" placeholder="Confirm your password" required>
+            <button type="button" class="eye-btn" onclick="Auth.toggleEye('su-confirm', this)">👁</button>
+          </div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I understand this app stores data locally and encrypted on my device.</label>
+        </div>
+        <button type="submit" class="btn-primary btn-full" id="su-btn">Create Account</button>
+      </form>
+      <div id="su-error" class="form-error hidden"></div>
+      <p class="auth-switch">Already have an account? <a href="#" onclick="App.navigate('login')">Log In</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="view-login" class="view hidden auth-view">
+  <div class="auth-bg"><div class="auth-glow g1"></div><div class="auth-glow g2"></div></div>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo"><span>🔐</span><span class="auth-logo-name">Secure Messaging</span></div>
+      <h2 class="auth-title">Welcome back</h2>
+      <p class="auth-subtitle">Your encrypted world awaits</p>
+      <form id="login-form" class="auth-form" onsubmit="Auth.handleLogin(event)">
+        <div class="form-group">
+          <label for="li-email">Email Address</label>
+          <input type="email" id="li-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="li-pass">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="li-pass" placeholder="Your password" required>
+            <button type="button" class="eye-btn" onclick="Auth.toggleEye('li-pass', this)">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary btn-full" id="li-btn">Log In Securely</button>
+      </form>
+      <div id="li-error" class="form-error hidden"></div>
+      <p class="auth-switch">Don't have an account? <a href="#" onclick="App.navigate('signup')">Sign Up Free</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DASHBOARD ===================== -->
+<div id="view-dashboard" class="view hidden dashboard-layout">
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sb-header">
+      <div class="sb-brand"><span>🔐</span><span class="sb-brand-name">Secure Messaging</span></div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-avatar" id="sb-avatar">?</div>
+      <div class="sb-user-info">
+        <div class="sb-user-name" id="sb-name">User</div>
+        <div class="sb-status"><span class="status-dot"></span><span>Online</span></div>
+      </div>
+      <button class="icon-btn" onclick="Auth.logout()" title="Logout">⏻</button>
+    </div>
+    <div class="partner-banner" id="partner-banner">
+      <span class="pb-icon">💑</span>
+      <div><div class="pb-title" id="pb-title">Not Connected</div><div class="pb-sub" id="pb-sub">Connect with partner</div></div>
+    </div>
+    <nav class="sb-nav">
+      <span class="nav-section-label">Menu</span>
+      <a class="nav-item active" id="nav-connect" href="#" onclick="Dashboard.show('connect'); return false;"><span>💑</span><span>Connect Partner</span></a>
+      <a class="nav-item" id="nav-chats" href="#" onclick="Dashboard.show('chats'); return false;"><span>💬</span><span>Chats</span><span class="nav-badge hidden" id="chat-badge">0</span></a>
+      <a class="nav-item" id="nav-calls" href="#" onclick="Dashboard.show('calls'); return false;"><span>📞</span><span>Calls</span></a>
+      <a class="nav-item" id="nav-video" href="#" onclick="Dashboard.show('video'); return false;"><span>🎥</span><span>Video Calls</span></a>
+    </nav>
+    <div class="sb-footer">
+      <div class="e2ee-badge">🔒 End-to-End Encrypted</div>
+      <button class="logout-btn" onclick="Auth.logout()">⏻ Logout</button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay hidden" id="sb-overlay" onclick="Dashboard.closeMobile()"></div>
+  <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="Dashboard.toggleMobile()">☰</button>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+
+    <!-- ===== CONNECT PARTNER PANEL ===== -->
+    <div id="panel-connect" class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">💑 Connect Partner</h2>
+        <p class="panel-sub">Generate a passcode or enter your partner's code to connect securely</p>
+      </div>
+      <div class="panel-body">
+        <div class="connect-grid">
+          <div class="connect-card">
+            <div class="cc-icon">🔑</div>
+            <h3>Your Connection Code</h3>
+            <p>Share this code with your partner</p>
+            <div class="passcode-display" id="my-passcode"><span class="pc-dash">— — — — — —</span></div>
+            <div class="passcode-actions">
+              <button class="btn-primary" onclick="Partner.generate()">Generate Code</button>
+              <button class="btn-ghost hidden" id="copy-btn" onclick="Partner.copy()">📋 Copy</button>
+            </div>
+            <div class="pc-timer hidden" id="pc-timer">Expires in: <span id="pc-countdown">10:00</span></div>
+          </div>
+          <div class="connect-or"><div class="or-line"></div><span>OR</span><div class="or-line"></div></div>
+          <div class="connect-card">
+            <div class="cc-icon">🤝</div>
+            <h3>Enter Partner's Code</h3>
+            <p>Type the 6-digit code your partner shared</p>
+            <div class="code-inputs">
+              <input type="text" maxlength="1" class="code-digit" id="cd1" oninput="Partner.next(this,'cd2')" onkeydown="Partner.back(event,null,'cd1')">
+              <input type="text" maxlength="1" class="code-digit" id="cd2" oninput="Partner.next(this,'cd3')" onkeydown="Partner.back(event,'cd1','cd2')">
+              <input type="text" maxlength="1" class="code-digit" id="cd3" oninput="Partner.next(this,'cd4')" onkeydown="Partner.back(event,'cd2','cd3')">
+              <input type="text" maxlength="1" class="code-digit" id="cd4" oninput="Partner.next(this,'cd5')" onkeydown="Partner.back(event,'cd3','cd4')">
+              <input type="text" maxlength="1" class="code-digit" id="cd5" oninput="Partner.next(this,'cd6')" onkeydown="Partner.back(event,'cd4','cd5')">
+              <input type="text" maxlength="1" class="code-digit" id="cd6" oninput="Partner.next(this,null)" onkeydown="Partner.back(event,'cd5','cd6')">
+            </div>
+            <button class="btn-primary btn-full" onclick="Partner.connect()">Connect Now</button>
+            <div id="connect-msg" class="connect-msg hidden"></div>
+          </div>
+        </div>
+        <div class="connected-state hidden" id="connected-state">
+          <div class="connected-card">
+            <div class="connected-heart">💞</div>
+            <h3>You're Connected!</h3>
+            <p>with <strong id="cp-name">Partner</strong></p>
+            <div class="connected-actions">
+              <div class="ca-item" onclick="Dashboard.show('chats')"><span>💬</span> Chat</div>
+              <div class="ca-item" onclick="Dashboard.show('calls')"><span>📞</span> Call</div>
+              <div class="ca-item" onclick="Dashboard.show('video')"><span>🎥</span> Video</div>
+            </div>
+            <button class="btn-danger" onclick="Partner.disconnect()">Disconnect</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CHATS PANEL ===== -->
+    <div id="panel-chats" class="panel hidden">
+      <div class="no-partner" id="chats-np">
+        <div class="np-icon">💬</div><h3>No Partner Connected</h3>
+        <p>Connect with your partner first to start chatting</p>
+        <button class="btn-primary" onclick="Dashboard.show('connect')">Connect Partner</button>
+      </div>
+      <div class="chat-wrap hidden" id="chat-ui">
+        <div class="chat-header">
+          <div class="ch-left">
+            <div class="chat-av" id="chat-av">?</div>
+            <div class="ch-info">
+              <div class="ch-name" id="chat-pname">Partner</div>
+              <div class="ch-status"><span class="status-dot"></span><span>Online · End-to-End Encrypted</span></div>
+            </div>
+          </div>
+          <div class="ch-right">
+            <button class="ch-btn" onclick="Chat.toggleSearch()" title="Search">🔍</button>
+            <button class="ch-btn" onclick="Calls.startCall()" title="Call">📞</button>
+            <button class="ch-btn" onclick="Calls.startVideo()" title="Video">🎥</button>
+            <div class="ch-lock">🔒</div>
+          </div>
+        </div>
+        <div class="chat-search hidden" id="chat-search">
+          <input type="text" id="search-input" placeholder="Search messages..." oninput="Chat.search(this.value)">
+          <button onclick="Chat.toggleSearch()">✕</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="sys-msg"><span>🔒 Messages are end-to-end encrypted. Only you and your partner can read them.</span></div>
+        </div>
+        <div class="chat-input-area">
+          <button class="ci-btn" onclick="Chat.toggleEmoji()" title="Emoji">😊</button>
+          <div class="emoji-picker hidden" id="emoji-picker"></div>
+          <button class="ci-btn" onclick="document.getElementById('file-input').click()" title="Attach">📎</button>
+          <input type="file" id="file-input" accept="image/*,video/*" style="display:none" onchange="Chat.uploadMedia(this)">
+          <div class="msg-input" id="msg-input" contenteditable="true" data-placeholder="Type a message..." onkeydown="Chat.keydown(event)" oninput="Chat.typing()"></div>
+          <button class="send-btn" onclick="Chat.send()"><span>➤</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CALLS PANEL ===== -->
+    <div id="panel-calls" class="panel hidden">
+      <div class="no-partner" id="calls-np">
+        <div class="np-icon">📞</div><h3>No Partner Connected</h3>
+        <p>Connect with your partner first to make calls</p>
+        <button class="btn-primary" onclick="Dashboard.show('connect')">Connect Partner</button>
+      </div>
+      <div class="calls-wrap hidden" id="calls-ui">
+        <div class="panel-header"><h2 class="panel-title">📞 Calls</h2></div>
+        <div class="panel-body">
+          <div class="call-partner-card">
+            <div class="cp-avatar" id="call-av">?</div>
+            <div class="cp-name" id="call-pname">Partner</div>
+            <div class="cp-status"><span class="status-dot"></span> Online</div>
+            <button class="call-start-btn" onclick="Calls.startCall()">📞 Voice Call</button>
+          </div>
+          <div class="history-section">
+            <h3 class="history-title">Recent Calls</h3>
+            <div id="calls-list" class="history-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== VIDEO PANEL ===== -->
+    <div id="panel-video" class="panel hidden">
+      <div class="no-partner" id="video-np">
+        <div class="np-icon">🎥</div><h3>No Partner Connected</h3>
+        <p>Connect with your partner first to video call</p>
+        <button class="btn-primary" onclick="Dashboard.show('connect')">Connect Partner</button>
+      </div>
+      <div class="calls-wrap hidden" id="video-ui">
+        <div class="panel-header"><h2 class="panel-title">🎥 Video Calls</h2></div>
+        <div class="panel-body">
+          <div class="call-partner-card">
+            <div class="cp-avatar" id="video-av">?</div>
+            <div class="cp-name" id="video-pname">Partner</div>
+            <div class="cp-status"><span class="status-dot"></span> Online</div>
+            <button class="video-start-btn" onclick="Calls.startVideo()">🎥 Video Call</button>
+          </div>
+          <div class="history-section">
+            <h3 class="history-title">Recent Video Calls</h3>
+            <div id="video-list" class="history-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===================== CALL OVERLAY ===================== -->
+<div id="call-overlay" class="call-overlay hidden">
+  <div class="call-screen">
+    <div class="call-e2ee-tag">🔒 End-to-End Encrypted</div>
+    <div class="call-rings">
+      <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+      <div class="call-av-inner" id="call-ov-av">?</div>
+    </div>
+    <div class="call-ov-name" id="call-ov-name">Partner</div>
+    <div class="call-ov-status" id="call-ov-status">Calling...</div>
+    <div class="call-duration hidden" id="call-dur">00:00</div>
+    <div class="call-controls">
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn" id="mute-btn" onclick="Calls.toggleMute()"><span id="mute-icon">🎤</span></button>
+        <span class="ctrl-lbl">Mute</span>
+      </div>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn ctrl-end" onclick="Calls.endCall()"><span>📵</span></button>
+        <span class="ctrl-lbl">End</span>
+      </div>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn" id="spk-btn" onclick="Calls.toggleSpeaker()"><span id="spk-icon">🔊</span></button>
+        <span class="ctrl-lbl">Speaker</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== VIDEO CALL OVERLAY ===================== -->
+<div id="video-overlay" class="video-overlay hidden">
+  <div class="video-screen">
+    <div class="remote-video">
+      <div class="rv-placeholder"><div class="rv-avatar" id="rv-av">?</div><div class="rv-name" id="rv-name">Partner</div></div>
+      <div class="rv-e2ee">🔒 Encrypted</div>
+    </div>
+    <div class="local-video">
+      <div class="lv-placeholder"><span id="lv-label">You</span></div>
+    </div>
+    <div class="vo-header">
+      <span class="vo-name" id="vo-name">Partner</span>
+      <span class="vo-dur" id="vo-dur">00:00</span>
+    </div>
+    <div class="vo-status" id="vo-status">Connecting...</div>
+    <div class="video-controls">
+      <button class="vc-btn" id="vm-btn" onclick="Calls.toggleVMute()"><span id="vm-icon">🎤</span></button>
+      <button class="vc-btn" id="vc-btn" onclick="Calls.toggleCam()"><span id="vc-icon">📷</span></button>
+      <button class="vc-btn vc-end" onclick="Calls.endVideo()"><span>📵</span></button>
+      <button class="vc-btn" onclick="Calls.shareScreen()"><span id="ss-icon">🖥</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast hidden" id="toast"><span id="toast-msg"></span></div>
+
+<script src="js/crypto.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/partner.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/calls.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
